@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   ft_free_mas.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vdemeshk <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: olyuboch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/01 15:34:49 by vdemeshk          #+#    #+#             */
-/*   Updated: 2017/10/01 15:34:52 by vdemeshk         ###   ########.fr       */
+/*   Created: 2017/09/14 14:07:33 by olyuboch          #+#    #+#             */
+/*   Updated: 2017/09/14 14:07:35 by olyuboch         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_free.h"
 
-void	ft_free(void)
+void	free_str_array(char **arr)
 {
-	ft_free_hash_table();
-	ft_free_history();
+	int		i;
+
+	i = 0;
+	while (arr[i])
+		free(arr[i++]);
+	free(arr);
+	arr = NULL;
 }

@@ -17,12 +17,10 @@
 # include "ft_hash_table.h"
 # include "ft_exec.h"
 
-void	ft_free(void);
+void	free_str_array(char **arr);
 void	ft_free_syntax_tree(t_syntax_tree *tree);
-void	ft_free_hash_table(void);
 void	ft_free_history(void);
 void	ft_free_proc(t_proc **proc);
-void	ft_free_mas(char **sp);
 void	free_token(t_token *token);
 void	free_token_list(t_token *token);
 

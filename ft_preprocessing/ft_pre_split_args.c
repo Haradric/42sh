@@ -67,7 +67,7 @@ void	ft_pre_realloc_args(char **sp, t_proc **proc)
 	mas[c] = NULL;
 	ft_pre_realloc_copy(sp, proc, &mas);
 	if ((*proc)->argv)
-		ft_free_mas((*proc)->argv);
+		free_str_array((*proc)->argv);
 	(*proc)->argv = mas;
 }
 
@@ -86,5 +86,5 @@ void	ft_pre_split_args(char *str, t_proc **proc)
 	if (!(sp = ft_strsplit(str, ' ')))
 		return ;
 	ft_pre_realloc_args(sp, proc);
-	ft_free_mas(sp);
+	free_str_array(sp);
 }

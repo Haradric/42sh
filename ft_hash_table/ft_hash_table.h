@@ -32,5 +32,6 @@ void				ft_hash_set(t_hash **table, char *command,
 								char *filename);
 char				*ft_hash_get(t_hash **table, char *command);
 void				ft_hash_remove(t_hash **table, char *command);
+void				free_hash_table(t_hash **table);
 
 #endif

@@ -12,92 +12,22 @@
 
 #include "ft_builtin.h"
 
-int		ft_if_true(char *env, char *mas)
+int		ft_built_unsetenv(char ***env, char **arg)
 {
-	int	i;
+	int		i;
 
+	if (!env || !*env || !arg)
+		return (0);
 	i = 0;
-	while (mas[i] == env[i])
-	{
-		if (env[i + 1] == '=')
-			return (1);
+	while (arg[i])
 		i++;
+	if (!ft_strcmp(arg[1], "PATH"))
+		free_hash_table(g_table);
+	if (i == 2)
+	{
+		ft_env_remove(env, arg[1]);
+		return (0);
 	}
+	write(2, "usage: unsetenv key\n", 20);
 	return (0);
-}
-
-void	ft_del_env(char ***env, char **mas, char **new)
-{
-	int		e;
-	int		m;
-	int		n;
-	int		coinc;
-
-	n = 0;
-	e = 0;
-	while ((*env)[e])
-	{
-		coinc = 0;
-		m = 0;
-		while (mas[++m])
-			coinc += ft_if_true((*env)[e], mas[m]);
-		if (coinc == 0)
-		{
-			new[n] = ft_strdup((*env)[e]);
-			n++;
-		}
-		free((*env)[e]);
-		e++;
-	}
-	free((*env));
-	new[n] = NULL;
-	*env = new;
-}
-
-int		ft_cmp(char **env, char *str)
-{
-	int	w;
-	int	i;
-
-	w = 0;
-	i = 0;
-	while (env[w])
-	{
-		while (str[i] == env[w][i])
-		{
-			if (env[w][i + 1] == '=')
-				return (1);
-			i++;
-		}
-		w++;
-	}
-	return (0);
-}
-
-int		ft_ch_mas(char **env, char **mas)
-{
-	int	w;
-	int	c;
-
-	w = 0;
-	c = 0;
-	while (mas[w])
-	{
-		c += ft_cmp(env, mas[w]);
-		w++;
-	}
-	return (c);
-}
-
-void	ft_envp(char **env)
-{
-	int	i;
-
-	i = 0;
-	while (env[i])
-	{
-		ft_putstr(env[i]);
-		write(1, "\n", 1);
-		i++;
-	}
 }

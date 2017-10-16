@@ -129,6 +129,7 @@ supported yet\n", 2);
 	}
 	init_42(envp);
 	go_42();
-	ft_free();
+	free_hash_table(g_table);
+	ft_free_history();
 	return (0);
 }

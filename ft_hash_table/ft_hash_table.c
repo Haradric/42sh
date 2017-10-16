@@ -51,6 +51,37 @@ t_hash		**ft_hash_table(char **env)
 		return (NULL);
 	table = ft_memalloc(sizeof(t_hash *) * HASH_SIZE + 1);
 	init_table(table, path);
-	ft_free_mas(path);
+	free_str_array(path);
 	return (table);
+}
+
+static void	free_elem(t_hash *elem)
+{
+	t_hash	*tmp;
+
+	while (elem)
+	{
+		tmp = elem;
+		elem = elem->next;
+		free(tmp->command);
+		free(tmp->filename);
+		free(tmp);
+	}
+}
+
+void		free_hash_table(t_hash **table)
+{
+	int		i;
+
+	if (!table)
+		return ;
+	i = 0;
+	while (i < HASH_SIZE)
+	{
+		if (table[i])
+			free_elem(table[i]);
+		i++;
+	}
+	free(table);
+	table = NULL;
 }
