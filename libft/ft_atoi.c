@@ -3,50 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olyuboch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mbraslav <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/29 14:13:35 by olyuboch          #+#    #+#             */
-/*   Updated: 2016/12/19 21:29:05 by olyuboch         ###   ########.fr       */
+/*   Created: 2016/11/27 17:23:00 by mbraslav          #+#    #+#             */
+/*   Updated: 2016/11/27 17:23:06 by mbraslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static unsigned char	*ft_znak(unsigned char *s)
+int		ft_atoi(const char *str)
 {
-	int	i;
+	int		i;
+	int		num;
+	int		sign;
 
-	i = 1;
-	while (*s == ' ' || *s == '\t' || *s == '\v'
-			|| *s == '\f' || *s == '\r' || *s == '\n')
-		s++;
-	return (s);
-}
-
-int						ft_atoi(const char *str)
-{
-	int					i;
-	unsigned char		*nstr;
-	unsigned long int	num;
-
+	i = 0;
 	num = 0;
-	i = 1;
-	nstr = ft_znak((unsigned char *)str);
-	if (*nstr == '-' || *nstr == '+')
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
+			|| str[i] == '\r' || str[i] == '\f')
+		i++;
+	sign = ((str[i] == '-') ? -1 : 1);
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		if (*nstr == '-')
-			i = -1;
-		nstr++;
+		num *= 10;
+		num += str[i] - '0';
+		i++;
 	}
-	while (ft_isdigit(*nstr))
-	{
-		if ((num > 922337203685477580 || (num == 922337203685477580
-			&& (*nstr - '0') > 7)) && i == 1)
-			return (-1);
-		else if ((num > 922337203685477580 || (num == 922337203685477580
-			&& (*nstr - '0') > 8)) && i == -1)
-			return (0);
-		num = num * 10 + (*nstr++ - '0');
-	}
-	return (num * i);
+	return (num * sign);
 }

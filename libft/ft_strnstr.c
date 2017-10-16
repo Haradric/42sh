@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olyuboch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mbraslav <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/28 20:40:38 by olyuboch          #+#    #+#             */
-/*   Updated: 2016/12/03 20:22:34 by olyuboch         ###   ########.fr       */
+/*   Created: 2016/11/27 17:23:23 by mbraslav          #+#    #+#             */
+/*   Updated: 2016/11/27 17:23:26 by mbraslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,29 @@
 
 char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	int		b;
-	int		l;
-	size_t	s;
+	unsigned int	i;
+	unsigned int	j;
+	int				found;
 
-	if (!*little)
-		return ((char*)big);
-	while (*big != '\0' && len != 0)
+	i = 0;
+	if (little[0] == '\0')
+		return ((char *)big);
+	while (big[i] && i < len)
 	{
-		l = 0;
-		b = 0;
-		s = len;
-		while (big[b] == little[l] && little[l] != '\0' && s != 0)
+		if (big[i] == little[0])
 		{
-			b++;
-			l++;
-			s--;
-			if (little[l] == '\0')
-				return ((char*)big + (b - l));
+			found = 1;
+			j = 0;
+			while (little[j] && found)
+			{
+				if (big[i + j] != little[j])
+					found = 0;
+				j++;
+			}
+			if (found && (i + j) <= len)
+				return ((char *)big + i);
 		}
-		big++;
-		len--;
+		i++;
 	}
 	return (0);
 }

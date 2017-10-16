@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olyuboch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mbraslav <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/26 15:11:14 by olyuboch          #+#    #+#             */
-/*   Updated: 2016/12/03 20:12:16 by olyuboch         ###   ########.fr       */
+/*   Created: 2016/11/26 15:33:49 by mbraslav          #+#    #+#             */
+/*   Updated: 2016/11/26 15:33:56 by mbraslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,11 @@
 
 char	*ft_strcat(char *s1, const char *s2)
 {
-	int	i1;
-	int	i2;
-	int	i20;
+	size_t	dstlen;
+	size_t	srclen;
 
-	i1 = ft_strlen(s1);
-	i2 = ft_strlen(s2);
-	i20 = 0;
-	while (i20 != i2)
-	{
-		s1[i1 + i20] = s2[i20];
-		i20++;
-	}
-	s1[i1 + i20] = '\0';
+	dstlen = ft_strlen(s1);
+	srclen = ft_strlen(s2);
+	ft_memcpy(s1 + dstlen, s2, srclen + 1);
 	return (s1);
 }

@@ -3,86 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: olyuboch <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mbraslav <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/03 19:15:58 by olyuboch          #+#    #+#             */
-/*   Updated: 2016/12/07 19:52:30 by olyuboch         ###   ########.fr       */
+/*   Created: 2016/11/30 13:39:19 by mbraslav          #+#    #+#             */
+/*   Updated: 2016/11/30 13:39:24 by mbraslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_words(char *s, char c)
+static size_t	word_count(char const *s, char c)
 {
-	int	sc;
-
-	sc = 0;
-	while (*s != '\0')
-	{
-		if (*s != c && *s != '\0')
-		{
-			sc++;
-			while (*s != c && *s != '\0')
-				s++;
-		}
-		if (*s == c)
-			s++;
-	}
-	return (sc);
-}
-
-static char	**ft_mas(char *s, char c)
-{
-	char	**mas;
-	size_t	i;
-	int		w;
+	int		i;
 
 	i = 0;
-	w = ft_words(s, c);
-	if (!(mas = (char **)malloc(sizeof(char *) * (w + 1))))
-		return (NULL);
-	mas[w] = NULL;
-	return (mas);
-}
-
-static char	**ft_sam(char *s, char c)
-{
-	char	**mas;
-	size_t	i;
-	int		w;
-
-	i = 0;
-	if (!(mas = ft_mas(s, c)))
-		return (NULL);
-	w = 0;
-	while (*s != '\0')
+	while (*s)
 	{
-		if (*s == c)
+		while (*s && *s == c)
 			s++;
-		while (*s != c && *s != '\0')
-		{
+		if (*s && *s != c)
 			i++;
+		while (*s && *s != c)
 			s++;
-			if (*s == c || *s == '\0')
-			{
-				mas[w] = ft_strsub((s - i), 0, i);
-				i = 0;
-				w++;
-			}
-		}
 	}
-	return (mas);
+	return (i);
 }
 
-char		**ft_strsplit(char const *s, char c)
+char			**ft_strsplit(char const *s, char c)
 {
-	char	**masiv;
-	char	*s2;
+	char	**arr;
+	char	*start;
+	int		i;
 
-	if (!s || !c)
+	if (!s || !(arr = (char **)malloc(sizeof(char *) * (word_count(s, c) + 1))))
 		return (NULL);
-	s2 = (char *)s;
-	if (!(masiv = ft_sam(s2, c)))
-		return (NULL);
-	return (masiv);
+	i = 0;
+	while (*s)
+	{
+		if (*s != c)
+		{
+			start = (char *)s;
+			while (*s && *s != c)
+				s++;
+			arr[i++] = ft_strsub(start, 0, s - start);
+		}
+		if (*s == '\0')
+			break ;
+		s++;
+	}
+	arr[i] = NULL;
+	return (arr);
 }
