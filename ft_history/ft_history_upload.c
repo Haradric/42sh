@@ -39,11 +39,11 @@ void	ft_history_upload(void)
 	char	*str;
 	char	*tmp;
 
-	if (!g_env_g)
+	if (!g_env)
 		return ;
-	if (!(e = ft_built_find_path(g_env_g, "HOME")))
+	if (!(e = ft_built_find_path(g_env, "HOME")))
 		return ;
-	str = g_env_g[e];
+	str = g_env[e];
 	while (str && *str != '=')
 		str++;
 	if (str != NULL)

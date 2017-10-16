@@ -32,9 +32,9 @@ void	ft_history_load(char *str, int fl)
 	char	*home;
 	char	*pth;
 
-	if (!(e = ft_built_find_path(g_env_g, "HOME")))
+	if (!(e = ft_built_find_path(g_env, "HOME")))
 		return ;
-	home = g_env_g[e];
+	home = g_env[e];
 	while (home && *home != '=')
 		home++;
 	if (home != NULL)

@@ -73,7 +73,7 @@ void	ft_exec_spawn(t_proc **proc)
 		ft_exec_close_except(*proc);
 		ft_exec_dup(*proc);
 		if (!ft_exec_is_builtin(proc))
-			execve((*proc)->path, (*proc)->argv, g_env_g);
+			execve((*proc)->path, (*proc)->argv, g_env);
 	}
 	(*proc)->pid = pid;
 }

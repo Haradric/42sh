@@ -25,7 +25,7 @@
 # define GNL_INSIDE 1
 # define BUFF 32
 
-extern char		**g_env_g;
+extern char		**g_env;
 
 typedef struct	s_fd
 {

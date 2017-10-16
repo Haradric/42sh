@@ -46,7 +46,7 @@ int		ft_exec_is_builtin(t_proc **proc)
 {
 	if (!ft_strcmp("env", (*proc)->argv[0]))
 	{
-		ft_env(g_env_g);
+		ft_env(g_env);
 		return (1);
 	}
 	else if (!ft_strcmp("echo", (*proc)->argv[0]))

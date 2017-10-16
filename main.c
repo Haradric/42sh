@@ -18,7 +18,7 @@ t_hash		**g_table;
 t_token		*g_prev_tok;
 t_token		*g_curr_sym;
 t_token		*g_next_sym;
-char		**g_env_g;
+char		**g_env;
 int			g_parent;
 char		*g_lft;
 char		*g_rgt;
@@ -29,19 +29,19 @@ static void	init_42(const char *const envp[])
 
 	g_parent = 1;
 	g_table = ft_hash_table((char **)envp);
-	g_env_g = ft_env_init(envp);
+	g_env = ft_env_init(envp);
 	g_history = NULL;
 	ft_history_upload();
 	g_promt = ft_strdup("wtf?> ");
-	ft_env_set(&g_env_g, "SHELL", "42sh");
-	if ((shlvl_str = ft_env_get(g_env_g, "SHLVL")))
+	ft_env_set(&g_env, "SHELL", "42sh");
+	if ((shlvl_str = ft_env_get(g_env, "SHLVL")))
 	{
 		shlvl_str = ft_itoa(ft_atoi(shlvl_str) + 1);
-		ft_env_set(&g_env_g, "SHLVL", shlvl_str);
+		ft_env_set(&g_env, "SHLVL", shlvl_str);
 		free(shlvl_str);
 	}
 	else
-		ft_env_set(&g_env_g, "SHLVL", "1");
+		ft_env_set(&g_env, "SHLVL", "1");
 	ft_signals();
 }
 

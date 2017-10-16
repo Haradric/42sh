@@ -73,7 +73,7 @@ int		ft_exec_old_method(t_proc **proc)
 	char	*f_pth;
 
 	i = 0;
-	if (!(pth = wt_pth(g_env_g, "PATH")))
+	if (!(pth = wt_pth(g_env, "PATH")))
 		return (-1);
 	while (pth[i])
 	{

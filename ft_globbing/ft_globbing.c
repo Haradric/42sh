@@ -65,7 +65,7 @@ static int			ft_do_globing(char *tokens, int flag, int cur_char, int c)
 	DIR				*dfd;
 
 	if ((ft_strlen(g_str) < 3) && (ft_strlen(g_str) != 1))
-		pwd = ft_env_get(g_env_g, "PWD");
+		pwd = ft_env_get(g_env, "PWD");
 	else
 		pwd = g_str;
 	if ((dfd = opendir(pwd)) == NULL)
@@ -121,10 +121,10 @@ void				ft_tilda_exchange(t_syntax_tree *arguments)
 			arguments->tree[g_index]->args[0][0] == '~')
 		{
 			if (ft_strlen(arguments->tree[g_index]->args[0]) > 1)
-				tmp = ft_strjoin(ft_env_get(g_env_g, "HOME"),
+				tmp = ft_strjoin(ft_env_get(g_env, "HOME"),
 					arguments->tree[g_index]->args[0] + 1);
 			else
-				tmp = ft_strdup(ft_env_get(g_env_g, "HOME"));
+				tmp = ft_strdup(ft_env_get(g_env, "HOME"));
 			ft_strdel(&arguments->tree[g_index]->args[0]);
 			arguments->tree[g_index]->args[0] = tmp;
 		}
