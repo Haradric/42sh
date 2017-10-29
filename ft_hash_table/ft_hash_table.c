@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "env.h"
 #include "ft_hash_table.h"
 #include "ft_free.h"
-#include "ft_env.h"
 
 static void	init_table(t_hash **table, char **path)
 {
@@ -47,7 +47,7 @@ t_hash		**ft_hash_table(char **env)
 	t_hash	**table;
 	char	**path;
 
-	if (!(path = ft_strsplit(ft_env_get(env, "PATH"), ':')))
+	if (!(path = ft_strsplit(env_get(env, "PATH"), ':')))
 		return (NULL);
 	table = ft_memalloc(sizeof(t_hash *) * HASH_SIZE + 1);
 	init_table(table, path);

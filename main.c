@@ -23,25 +23,25 @@ int			g_parent;
 char		*g_lft;
 char		*g_rgt;
 
-static void	init_42(const char *const envp[])
+static void	init_42(const char **envp)
 {
 	char	*shlvl_str;
 
 	g_parent = 1;
 	g_table = ft_hash_table((char **)envp);
-	g_env = ft_env_init(envp);
+	g_env = env_init(envp);
 	g_history = NULL;
 	ft_history_upload();
 	g_promt = ft_strdup("wtf?> ");
-	ft_env_set(&g_env, "SHELL", "42sh");
-	if ((shlvl_str = ft_env_get(g_env, "SHLVL")))
+	env_set(&g_env, "SHELL", "42sh");
+	if ((shlvl_str = env_get(g_env, "SHLVL")))
 	{
 		shlvl_str = ft_itoa(ft_atoi(shlvl_str) + 1);
-		ft_env_set(&g_env, "SHLVL", shlvl_str);
+		env_set(&g_env, "SHLVL", shlvl_str);
 		free(shlvl_str);
 	}
 	else
-		ft_env_set(&g_env, "SHLVL", "1");
+		env_set(&g_env, "SHLVL", "1");
 	ft_signals();
 }
 
@@ -117,8 +117,9 @@ void		go_42(void)
 	}
 }
 
-int			main(int argc, const char *const argv[], const char *const envp[])
+int			main(int argc, const char **argv, const char **envp)
 {
+	
 	(void)argc;
 	(void)argv;
 	if (argc > 1)

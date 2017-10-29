@@ -14,8 +14,9 @@
 # define __FT_EXEC_PRIVATE_H
 
 # include <sys/wait.h>
+
+# include "env.h"
 # include "ft_exec.h"
-# include "ft_env.h"
 # include "ft_builtin.h"
 # include "../libft/libft.h"
 # include "ft_hash_table.h"

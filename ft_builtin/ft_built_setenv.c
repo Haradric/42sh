@@ -26,7 +26,7 @@ int		ft_built_setenv(char ***env, char **arg)
 	if (i == 2 && (eq = ft_strchr(arg[1], '=')))
 	{
 		key = ft_strsub(arg[1], 0, eq - arg[1]);
-		ft_env_set(env, key, eq + 1);
+		env_set(env, key, eq + 1);
 		if (!ft_strcmp(key, "PATH"))
 		{
 			free_hash_table(g_table);

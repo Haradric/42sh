@@ -15,9 +15,10 @@
 
 # include <stdlib.h>
 # include <string.h>
-# include "ft_parser.h"
 # include <dirent.h>
-# include "ft_env.h"
+
+# include "env.h"
+# include "ft_parser.h"
 # include "../libft/libft.h"
 
 # define U(c) ((c) & 0377)

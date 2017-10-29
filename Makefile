@@ -20,6 +20,7 @@ else ifeq ($(TYPE),debug)
 CFLAGS += -g
 endif
 
+include env/files.mk
 include ft_hash_table/files.mk
 include ft_readline/files.mk
 include ft_exec/files.mk
@@ -27,7 +28,6 @@ include ft_history/files.mk
 include ft_lexer/files.mk
 include ft_parser/files.mk
 include ft_free/files.mk
-include ft_env/files.mk
 include ft_preprocessing/files.mk
 include ft_globbing/files.mk
 include ft_builtin/files.mk

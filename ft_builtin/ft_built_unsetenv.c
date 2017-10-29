@@ -25,7 +25,7 @@ int		ft_built_unsetenv(char ***env, char **arg)
 		free_hash_table(g_table);
 	if (i == 2)
 	{
-		ft_env_remove(env, arg[1]);
+		env_remove(env, arg[1]);
 		return (0);
 	}
 	write(2, "usage: unsetenv key\n", 20);

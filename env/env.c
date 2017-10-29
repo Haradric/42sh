@@ -1,30 +1,19 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: alischyn <alischyn@student.unit.ua>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/06/07 19:19:11 by alischyn          #+#    #+#             */
-/*   Updated: 2017/07/31 16:15:31 by alischyn         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
-#include "ft_env.h"
+#include "env.h"
 
-char			**ft_env_init(const char *const envp[])
+char			**env_init(const char **environ)
 {
 	char	**env;
 	int		i;
 
 	i = 0;
-	while (envp[i])
+	while (environ[i])
 		i++;
 	env = malloc(sizeof(char *) * (i + 1));
 	i = 0;
-	while (envp[i])
+	while (environ[i])
 	{
-		env[i] = ft_strdup(envp[i]);
+		env[i] = ft_strdup(environ[i]);
 		i++;
 	}
 	env[i] = NULL;
@@ -55,7 +44,7 @@ static void		env_add(char ***env, char *entry)
 	*env = new_env;
 }
 
-void			ft_env_set(char ***env, const char *key, const char *val)
+void			env_set(char ***env, const char *key, const char *val)
 {
 	char	*entry;
 	size_t	len;
@@ -82,7 +71,7 @@ void			ft_env_set(char ***env, const char *key, const char *val)
 		env_add(env, entry);
 }
 
-char			*ft_env_get(char **env, const char *key)
+char			*env_get(char **env, const char *key)
 {
 	size_t	len;
 	int		i;
@@ -100,7 +89,7 @@ char			*ft_env_get(char **env, const char *key)
 	return (NULL);
 }
 
-void			ft_env_remove(char ***env, const char *key)
+void			env_remove(char ***env, const char *key)
 {
 	size_t	len;
 	int		i;

@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "env.h"
 #include "ft_exec_private.h"
-#include "ft_env.h"
 
 void	ft_env(char **env)
 {
