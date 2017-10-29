@@ -13,7 +13,7 @@
 #ifndef __FT_LEXER_H
 # define __FT_LEXER_H
 
-# include "libft.h"
+# include "../libft/libft.h"
 
 typedef enum	e_token_type
 {

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_readline.h"
+#include "../shell.h"
 
 void	ft_without_right(char **lft, char **rgt)
 {

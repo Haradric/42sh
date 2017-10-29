@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_builtin.h"
+#include "../shell.h"
 
 char	*ft_make_home(char ***env, int h, char **mas, int i)
 {

@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_readline.h"
+#include "../shell.h"
 
 void	ft_move_line_up_str(char **lft, char **rgt, int l, int len)
 {

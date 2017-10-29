@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_preprocessing_private.h"
+#include "../shell.h"
 
 extern char	*g_heredoc;
 

@@ -28,4 +28,7 @@
 
 char	*ft_join_quote(char *a, char *b);
 
+char	*ft_freedup(char *str, int f);
+char	*ft_freejoin(char *s1, char *s2, int f);
+
 #endif

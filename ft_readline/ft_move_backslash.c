@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_readline.h"
+#include "../shell.h"
 
 void	ft_del_right(char *rgt)
 {

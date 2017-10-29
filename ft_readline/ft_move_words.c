@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_readline.h"
+#include "../shell.h"
 
 int		ft_find_left(char *lft, int l)
 {

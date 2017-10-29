@@ -12,6 +12,7 @@
 
 #include "ft_history.h"
 #include "ft_free.h"
+#include "../shell.h"
 
 t_his	*ft_history_up(void)
 {

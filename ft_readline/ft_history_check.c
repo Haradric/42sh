@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_readline.h"
+#include "../shell.h"
 
 t_match	*ft_history_match(t_his *his, char *new, int l)
 {

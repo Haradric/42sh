@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_preprocessing_private.h"
+#include "../shell.h"
 #define BUF 1024
 
 void	ft_pre_find_args(t_syntax_tree *tree, t_proc **bq)

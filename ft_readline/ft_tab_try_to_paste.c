@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_readline.h"
+#include "../shell.h"
 
 char	*ft_new_add(char *find, int c, int num, char *fold)
 {

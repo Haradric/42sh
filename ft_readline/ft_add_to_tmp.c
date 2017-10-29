@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_readline.h"
+#include "../shell.h"
 
 char	*ft_cmp_left_right(char *left, char *right)
 {

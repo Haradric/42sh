@@ -12,6 +12,7 @@
 
 #include "ft_readline.h"
 #include "ft_history.h"
+#include "../shell.h"
 
 char	*ft_line(char *lft, char *rgt)
 {
