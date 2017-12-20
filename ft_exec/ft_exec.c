@@ -45,6 +45,9 @@ int		ft_exec_builtins(t_proc **proc)
 {
 	int	status;
 
+	int argc = 0;
+	while ((*proc)->argv[argc])
+		++argc;
 	status = 1;
 	if (!ft_strcmp("exit", (*proc)->argv[0]))
 	{
@@ -54,11 +57,11 @@ int		ft_exec_builtins(t_proc **proc)
 		!ft_strncmp("!", (*proc)->argv[0], 1))
 		status = ft_history_print(proc);
 	else if (!ft_strcmp("setenv", (*proc)->argv[0]))
-		status = ft_built_setenv(&g_env, (*proc)->argv);
+		status = builtin_setenv(&g_env, argc, (*proc)->argv);
 	else if (!ft_strcmp("unsetenv", (*proc)->argv[0]))
-		status = ft_built_unsetenv(&g_env, (*proc)->argv);
+		status = builtin_unsetenv(&g_env, argc, (*proc)->argv);
 	else if (!ft_strcmp("cd", (*proc)->argv[0]))
-		status = ft_built_cd(&g_env, (*proc)->argv);
+		status = builtin_cd(&g_env, argc, (*proc)->argv);
 	else if (!ft_strcmp("env", (*proc)->argv[0]) ||
 			!ft_strcmp("echo", (*proc)->argv[0]))
 	{

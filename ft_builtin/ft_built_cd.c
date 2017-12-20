@@ -1,123 +1,40 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_built_cd.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: olyuboch <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/07 16:32:05 by olyuboch          #+#    #+#             */
-/*   Updated: 2017/09/07 16:32:06 by olyuboch         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "ft_builtin.h"
-#include "../shell.h"
 
-char	*ft_make_home(char ***env, int h, char **mas, int i)
-{
-	char	*pth;
-	char	*tmp;
-
-	pth = NULL;
-	tmp = NULL;
-	if (!(tmp = ft_strdup((*env)[h] + 5)))
-		return (NULL);
-	if (!mas[1])
-		return (tmp);
-	else
-		pth = ft_freejoin(tmp, mas[i] + 1, 1);
-	return (pth);
-}
-
-char	*ft_up_pth(char *str)
-{
-	char	*tmp;
-	int		i;
-	int		sl;
-	char	*pth;
-
-	i = 0;
-	if (!(tmp = ft_strdup(str + 4)))
-		return (NULL);
-	while (tmp[i] != '\0')
-	{
-		if (tmp[i] == '/')
-			sl = i;
-		i++;
-	}
-	if (sl == 0)
-		*(tmp + 1) = '\0';
-	else
-		*(tmp + sl) = '\0';
-	pth = ft_strdup(tmp);
-	free(tmp);
-	return (pth);
-}
-
-char	*ft_old_pth(char **env, int o, int h)
+static void change_env(char ***env)
 {
 	char	*oldpwd;
-	int		len_o;
-	int		len_h;
+	char	*cwd;
 
-	oldpwd = ft_strdup(env[o] + 7);
-	len_o = ft_strlen(env[o] + 7);
-	len_h = ft_strlen(env[h] + 5);
-	if (len_o < len_h)
-		ft_putendl(oldpwd);
-	else if (len_o == len_h)
-		ft_putendl("~");
-	else if (len_o > len_h)
-	{
-		ft_putstr("~");
-		ft_putendl(oldpwd + len_h);
-	}
-	return (oldpwd);
+	oldpwd = env_get(*env, "PWD");
+	env_set(env, "OLDPWD", oldpwd);
+	cwd = NULL;
+	env_set(env, "PWD", getcwd(cwd, 0));
+	free(cwd);
 }
 
-char	*ft_cmp_path(char ***env, char **mas, int p, int o)
+int			builtin_cd(char ***env, int argc, char **argv)
 {
-	int		i;
-	int		h;
-	char	*pth;
+	char	*pwd;
 
-	i = 0;
-	pth = NULL;
-	h = ft_built_find_path(*env, "HOME=");
-	while (mas[i])
-		i++;
-	i--;
-	if (!mas[1] || mas[i][0] == '~')
-		pth = ft_make_home(env, h, mas, i);
-	else if (!ft_strcmp("..", mas[i]))
-		pth = ft_up_pth((*env)[p]);
-	else if (!ft_strcmp("-", mas[i]))
-		pth = ft_old_pth(*env, o, h);
+	if (argc == 1)
+		pwd = env_get(*env, "HOME");
+	else if (argc == 2 && !ft_strcmp(argv[1], "-"))
+		pwd = env_get(*env, "OLDPWD");
+	else if (argc == 2)
+		pwd = (char *)argv[1];
 	else
-		pth = ft_built_dir_by_path(mas[i]);
-	return (pth);
-}
-
-int		ft_built_cd(char ***env, char **mas)
-{
-	char	*pth;
-	int		p;
-	int		o;
-	char	oldpwd[1024];
-
-	getcwd(oldpwd, sizeof(oldpwd));
-	p = ft_built_find_path(*env, "PWD");
-	o = ft_built_find_path(*env, "OLDPWD");
-	pth = ft_cmp_path(env, mas, p, o);
-	if (chdir(pth))
 	{
-		write(1, "cd: no such file or directory: ", 31);
-		ft_putendl(mas[1]);
-		free(pth);
+		error("cd:", "too much arguments");
 		return (-1);
 	}
-	else
-		ft_built_change_pwd(env, oldpwd, p, o);
-	free(pth);
+	if (chdir(pwd))
+	{
+		ft_perror("cd:", pwd);
+		return (-1);
+	}
+	change_env(env);
+	if (argc == 2 && !ft_strcmp(argv[1], "-"))
+		ft_putendl(env_get(*env, "PWD"));
 	return (0);
 }

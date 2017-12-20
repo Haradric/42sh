@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <string.h>
 
+# include "libft/libft.h"
 # include "env.h"
 # include "ft_readline.h"
 # include "ft_hash_table.h"
@@ -25,7 +26,6 @@
 # include "ft_preprocessing.h"
 # include "ft_history.h"
 # include "ft_signals.h"
-# include "libft/libft.h"
 
 char	*ft_join_quote(char *a, char *b);
 

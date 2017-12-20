@@ -1,40 +1,18 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_built_setenv.c                                  :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: olyuboch <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/09/07 15:44:29 by olyuboch          #+#    #+#             */
-/*   Updated: 2017/09/07 15:52:20 by olyuboch         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "ft_builtin.h"
 
-int		ft_built_setenv(char ***env, char **arg)
+int		builtin_setenv(char ***env, int argc, char **argv)
 {
-	char	*key;
-	char	*eq;
-	int		i;
-
-	if (!env | !*env | !arg)
-		return (0);
-	i = 0;
-	while (arg[i])
-		i++;
-	if (i == 2 && (eq = ft_strchr(arg[1], '=')))
+	if (argc != 3)
 	{
-		key = ft_strsub(arg[1], 0, eq - arg[1]);
-		env_set(env, key, eq + 1);
-		if (!ft_strcmp(key, "PATH"))
-		{
-			free_hash_table(g_table);
-			g_table = ft_hash_table(*env);
-		}
-		free(key);
-		return (0);
+		error("42sh:", "usage: setenv key value");
+		return (0); // ???
 	}
-	write(2, "usage: setenv key=value\n", 24);
+	env_set(env, argv[1], argv[2]);
+	if (!ft_strcmp(argv[1], "PATH"))
+	{
+		free_hash_table(g_table);
+		g_table = ft_hash_table(*env);
+	}
 	return (0);
 }
