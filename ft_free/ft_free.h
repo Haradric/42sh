@@ -14,7 +14,7 @@
 # define __FT_FREE_H
 # include "ft_parser.h"
 # include "ft_readline.h"
-# include "ft_hash_table.h"
+# include "hash_table.h"
 # include "ft_exec.h"
 
 void	free_str_array(char **arr);

@@ -1,5 +1,5 @@
 
-#include "ft_hash_table.h"
+#include "hash_table.h"
 #include "ft_free.h"
 
 static void	init_table(t_hash **table, char **path)
@@ -21,7 +21,7 @@ static void	init_table(t_hash **table, char **path)
 			free(tmp);
 			if (!access(filename, X_OK) && \
 				(entry->d_type == DT_REG || entry->d_type == DT_LNK))
-				ft_hash_set(table, entry->d_name, filename);
+				hash_set(table, entry->d_name, filename);
 			free(filename);
 		}
 		if (dir)
@@ -30,7 +30,7 @@ static void	init_table(t_hash **table, char **path)
 	}
 }
 
-t_hash		**ft_hash_table(char **env)
+t_hash		**hash_table_init(char **env)
 {
 	t_hash	**table;
 	char	**path;
@@ -57,7 +57,7 @@ static void	free_elem(t_hash *elem)
 	}
 }
 
-void		free_hash_table(t_hash ***table)
+void		hash_table_free(t_hash ***table)
 {
 	int		i;
 

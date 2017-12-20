@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "shell.h"
-#include "ft_hash_table.h"
+#include "hash_table.h"
 
 #include "ft_history.h"
 #include "ft_signals.h"
@@ -103,7 +103,7 @@ static void	init_42(const char **envp)
 	char	*shlvl_str;
 
 	g_parent = 1;
-	g_table = ft_hash_table((char **)envp);
+	g_table = hash_table_init((char **)envp);
 	g_env = env_init(envp);
 	g_history = NULL;
 	ft_history_upload();
@@ -128,7 +128,7 @@ int			main(int argc, const char **argv, const char **envp)
 		terminate("42sh:", "non-interactive mode is not supported yet");
 	init_42(envp);
 	go_42();
-	free_hash_table(&g_table);
+	hash_table_free(&g_table);
 	ft_free_history();
 	return (0);
 }

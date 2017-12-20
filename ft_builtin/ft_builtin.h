@@ -3,7 +3,7 @@
 # define FT_BUILTIN_H
 
 # include "../shell.h"
-# include "ft_hash_table.h"
+# include "hash_table.h"
 
 extern	t_hash	**g_table;
 
