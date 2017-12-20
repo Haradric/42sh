@@ -1,6 +1,6 @@
 
-#ifndef FT_BUILTIN_H
-# define FT_BUILTIN_H
+#ifndef BUILTIN_H
+# define BUILTIN_H
 
 # include "../shell.h"
 # include "hash_table.h"

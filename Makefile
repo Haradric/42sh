@@ -23,6 +23,7 @@ CFLAGS += -g
 endif
 
 include hash_table/files.mk
+include builtin/files.mk
 include ft_readline/files.mk
 include ft_exec/files.mk
 include ft_history/files.mk
@@ -31,7 +32,7 @@ include ft_parser/files.mk
 include ft_free/files.mk
 include ft_preprocessing/files.mk
 include ft_globbing/files.mk
-include ft_builtin/files.mk
+
 include ft_signals/files.mk
 
 .PHONY: all clean fclean norm

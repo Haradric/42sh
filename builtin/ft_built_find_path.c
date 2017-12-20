@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_builtin.h"
+#include "builtin.h"
 
 int		ft_built_find_path(char **env, char *str)
 {
