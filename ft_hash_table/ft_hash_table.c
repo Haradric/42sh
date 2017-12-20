@@ -69,19 +69,19 @@ static void	free_elem(t_hash *elem)
 	}
 }
 
-void		free_hash_table(t_hash **table)
+void		free_hash_table(t_hash ***table)
 {
 	int		i;
 
-	if (!table)
+	if (!*table)
 		return ;
 	i = 0;
 	while (i < HASH_SIZE)
 	{
-		if (table[i])
-			free_elem(table[i]);
+		if ((*table)[i])
+			free_elem((*table)[i]);
 		i++;
 	}
-	free(table);
-	table = NULL;
+	free(*table);
+	*table = NULL;
 }

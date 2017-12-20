@@ -130,7 +130,7 @@ supported yet\n", 2);
 	}
 	init_42(envp);
 	go_42();
-	free_hash_table(g_table);
+	free_hash_table(&g_table);
 	ft_free_history();
 	return (0);
 }
