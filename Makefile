@@ -8,7 +8,8 @@ CFLAGS = -Wall -Wextra -Werror
 LDFLAGS =
 SOURCES =	main.c\
 			ft_join_quote.c\
-			utils.c
+			utils.c\
+			error.c
 LIBFT = libft/libft.a
 
 OBJECTS = $(addprefix $(obj)/,$(subst .c,.o,$(SOURCES)))
