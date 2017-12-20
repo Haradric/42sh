@@ -11,39 +11,24 @@
 /* ************************************************************************** */
 
 #include "shell.h"
+#include "ft_hash_table.h"
+
+#include "ft_history.h"
+#include "ft_signals.h"
+#include "ft_preprocessing.h"
+
+char		**g_env;
+t_hash		**g_table;
 
 char		*g_promt;
 t_his		*g_history;
-t_hash		**g_table;
 t_token		*g_prev_tok;
 t_token		*g_curr_sym;
 t_token		*g_next_sym;
-char		**g_env;
+
 int			g_parent;
 char		*g_lft;
 char		*g_rgt;
-
-static void	init_42(const char **envp)
-{
-	char	*shlvl_str;
-
-	g_parent = 1;
-	g_table = ft_hash_table((char **)envp);
-	g_env = env_init(envp);
-	g_history = NULL;
-	ft_history_upload();
-	g_promt = ft_strdup("wtf?> ");
-	env_set(&g_env, "SHELL", "42sh");
-	if ((shlvl_str = env_get(g_env, "SHLVL")))
-	{
-		shlvl_str = ft_itoa(ft_atoi(shlvl_str) + 1);
-		env_set(&g_env, "SHLVL", shlvl_str);
-		free(shlvl_str);
-	}
-	else
-		env_set(&g_env, "SHLVL", "1");
-	ft_signals();
-}
 
 int			unclosed_quote(t_token *t, int i)
 {
@@ -86,10 +71,6 @@ void		ft_find_quotes(t_token **tokens, char **cmd)
 	g_promt = oldpromt;
 }
 
-/*
-**	ft_tree_print(tree, 0);
-*/
-
 void		go_42(void)
 {
 	char			*input;
@@ -117,17 +98,34 @@ void		go_42(void)
 	}
 }
 
+static void	init_42(const char **envp)
+{
+	char	*shlvl_str;
+
+	g_parent = 1;
+	g_table = ft_hash_table((char **)envp);
+	g_env = env_init(envp);
+	g_history = NULL;
+	ft_history_upload();
+	g_promt = ft_strdup("wtf?> ");
+	env_set(&g_env, "SHELL", "42sh");
+	if ((shlvl_str = env_get(g_env, "SHLVL")))
+	{
+		shlvl_str = ft_itoa(ft_atoi(shlvl_str) + 1);
+		env_set(&g_env, "SHLVL", shlvl_str);
+		free(shlvl_str);
+	}
+	else
+		env_set(&g_env, "SHLVL", "1");
+	ft_signals();
+}
+
 int			main(int argc, const char **argv, const char **envp)
 {
-	
 	(void)argc;
 	(void)argv;
 	if (argc > 1)
-	{
-		ft_putstr_fd("wtf?: non-interactive mode is not \
-supported yet\n", 2);
-		return (0);
-	}
+		terminate("42sh:", "non-interactive mode is not supported yet");
 	init_42(envp);
 	go_42();
 	free_hash_table(&g_table);

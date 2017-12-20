@@ -17,7 +17,6 @@
 # include <string.h>
 # include <dirent.h>
 
-# include "env.h"
 # include "ft_parser.h"
 # include "../libft/libft.h"
 

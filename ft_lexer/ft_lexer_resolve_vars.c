@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
 #include "ft_lexer_private.h"
 
 static char	const	*ft_get_var_content(const char *var, int len)

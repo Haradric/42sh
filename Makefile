@@ -9,6 +9,7 @@ LDFLAGS =
 SOURCES =	main.c\
 			ft_join_quote.c\
 			utils.c\
+			env.c\
 			error.c
 LIBFT = libft/libft.a
 
@@ -21,7 +22,6 @@ else ifeq ($(TYPE),debug)
 CFLAGS += -g
 endif
 
-include env/files.mk
 include ft_hash_table/files.mk
 include ft_readline/files.mk
 include ft_exec/files.mk

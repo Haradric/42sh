@@ -1,7 +1,7 @@
 
-#include "env.h"
+#include "shell.h"
 
-char			**env_init(const char **environ)
+char		**env_init(const char **environ)
 {
 	char	**env;
 	int		i;
@@ -20,7 +20,7 @@ char			**env_init(const char **environ)
 	return (env);
 }
 
-static void		env_add(char ***env, char *entry)
+static void	env_add(char ***env, char *entry)
 {
 	char	**new_env;
 	int		i;
@@ -44,7 +44,7 @@ static void		env_add(char ***env, char *entry)
 	*env = new_env;
 }
 
-void			env_set(char ***env, const char *key, const char *val)
+void		env_set(char ***env, const char *key, const char *val)
 {
 	char	*entry;
 	size_t	len;
@@ -71,7 +71,7 @@ void			env_set(char ***env, const char *key, const char *val)
 		env_add(env, entry);
 }
 
-char			*env_get(char **env, const char *key)
+char		*env_get(char **env, const char *key)
 {
 	size_t	len;
 	int		i;
@@ -89,7 +89,7 @@ char			*env_get(char **env, const char *key)
 	return (NULL);
 }
 
-void			env_remove(char ***env, const char *key)
+void		env_remove(char ***env, const char *key)
 {
 	size_t	len;
 	int		i;

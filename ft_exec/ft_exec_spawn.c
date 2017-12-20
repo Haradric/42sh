@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
 #include "ft_exec_private.h"
 
 extern int	g_parent;

@@ -14,9 +14,10 @@
 # define FT_HISTORY_H
 
 # include <stdio.h>
+# include <fcntl.h>
 # include "ft_readline.h"
 # include "ft_builtin.h"
-# include <fcntl.h>
+# include "ft_exec.h"
 
 # define TRUE 1
 # define FALSE 0
