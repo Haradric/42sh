@@ -20,7 +20,7 @@
 char		**g_env;
 t_hash		**g_table;
 
-char		*g_promt;
+char		*g_prompt;
 t_his		*g_history;
 t_token		*g_prev_tok;
 t_token		*g_curr_sym;
@@ -40,17 +40,17 @@ int			unclosed_quote(t_token *t, int i)
 	i += (t->type == T_OP_BQUOTE);
 	if (i & 1)
 	{
-		g_promt = ("bquote> ");
+		g_prompt = ("bquote> ");
 		return (1);
 	}
 	if (t->subtype == ST_DQUOTE_EOF)
 	{
-		g_promt = ("dquote> ");
+		g_prompt = ("dquote> ");
 		return (1);
 	}
 	if (t->subtype == ST_QUOTE_EOF)
 	{
-		g_promt = ("quote> ");
+		g_prompt = ("quote> ");
 		return (1);
 	}
 	return (0);
@@ -58,9 +58,9 @@ int			unclosed_quote(t_token *t, int i)
 
 void		ft_find_quotes(t_token **tokens, char **cmd)
 {
-	char	*oldpromt;
+	char	*oldprompt;
 
-	oldpromt = g_promt;
+	oldprompt = g_prompt;
 	while (unclosed_quote(*tokens, 0))
 	{
 		write(1, "\n", 1);
@@ -68,7 +68,7 @@ void		ft_find_quotes(t_token **tokens, char **cmd)
 		(*cmd) = ft_join_quote(*cmd, ft_readline());
 		(*tokens) = get_token_list((*cmd) ? (*cmd) : "");
 	}
-	g_promt = oldpromt;
+	g_prompt = oldprompt;
 }
 
 void		go_42(void)
@@ -107,7 +107,7 @@ static void	init_42(const char **envp)
 	g_env = env_init(envp);
 	g_history = NULL;
 	ft_history_upload();
-	g_promt = ft_strdup("wtf?> ");
+	g_prompt = ft_strdup("wtf?> ");
 	env_set(&g_env, "SHELL", "42sh");
 	if ((shlvl_str = env_get(g_env, "SHLVL")))
 	{

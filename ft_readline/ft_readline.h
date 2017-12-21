@@ -78,10 +78,10 @@ typedef struct		s_his
 	struct s_his	*next;
 }					t_his;
 
-extern char			*g_promt;
+extern char			*g_prompt;
 extern t_his		*g_history;
 
-char				*ft_readline();
+char				*ft_readline(void);
 void				ft_get_line(char **line, t_his **his);
 void				ft_add_to_history(t_his **his, char *line);
 void				ft_terminal_set(void);

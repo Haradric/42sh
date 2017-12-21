@@ -42,7 +42,7 @@ static void	input_signal_handler(int signo)
 		g_lft = NULL;
 		g_rgt = NULL;
 		write(1, "\n", 1);
-		ft_putstr(g_promt);
+		ft_putstr(g_prompt);
 	}
 	return ;
 }

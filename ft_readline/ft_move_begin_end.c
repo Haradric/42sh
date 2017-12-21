@@ -50,11 +50,11 @@ void	ft_move_row(int r, int l, int len)
 {
 	int		pos;
 	int		row;
-	int		promt;
+	int		prompt;
 
-	promt = ft_strlen(g_promt);
-	pos = ((l + promt + r) % len);
-	row = ((l + promt + r) / len) - ((l + promt) / len);
+	prompt = ft_strlen(g_prompt);
+	pos = ((l + prompt + r) % len);
+	row = ((l + prompt + r) / len) - ((l + prompt) / len);
 	if (!row)
 	{
 		while (r != 0)

@@ -29,7 +29,7 @@ char			*ft_readline(void)
 	line = NULL;
 	ft_signals_input();
 	ft_terminal_set();
-	ft_putstr(g_promt);
+	ft_putstr(g_prompt);
 	ft_get_line(&line, &g_history);
 	ft_terminal_set();
 	ft_signals();

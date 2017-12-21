@@ -18,7 +18,7 @@
 # include "../libft/libft.h"
 
 extern int	g_parent;
-extern char	*g_promt;
+extern char	*g_prompt;
 extern char	*g_lft;
 extern char	*g_rgt;
 
