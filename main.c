@@ -104,7 +104,8 @@ static void	init_42(const char **envp)
 
 	g_env = env_init(envp);
 	g_table = hash_table_init((char **)envp);
-	g_prompt = ft_strdup("wtf?> ");
+	g_prompt = ft_strjoin(env_get(g_env, "USER"), " > ");
+	env_set(&g_env, "PROMPT", g_prompt);
 	env_set(&g_env, "SHELL", "42sh");
 	if ((shlvl_str = env_get(g_env, "SHLVL")))
 	{
