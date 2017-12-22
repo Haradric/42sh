@@ -55,11 +55,11 @@ $(obj)/%.o: %.c
 	@$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
-	make clean -C libft
+	@make clean -C libft
 	rm -rf build-*/obj
 
 fclean:
-	make fclean -C libft
+	@make fclean -C libft
 	rm -rf build-debug build-release $(NAME)
 
 re: fclean all
