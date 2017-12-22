@@ -102,11 +102,8 @@ static void	init_42(const char **envp)
 {
 	char	*shlvl_str;
 
-	g_parent = 1;
-	g_table = hash_table_init((char **)envp);
 	g_env = env_init(envp);
-	g_history = NULL;
-	ft_history_upload();
+	g_table = hash_table_init((char **)envp);
 	g_prompt = ft_strdup("wtf?> ");
 	env_set(&g_env, "SHELL", "42sh");
 	if ((shlvl_str = env_get(g_env, "SHLVL")))
@@ -117,6 +114,8 @@ static void	init_42(const char **envp)
 	}
 	else
 		env_set(&g_env, "SHLVL", "1");
+	history_file_restore("~/.42sh_history");
+	g_parent = 1;
 	ft_signals();
 }
 

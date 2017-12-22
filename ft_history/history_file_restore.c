@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_history_upload.c                                :+:      :+:    :+:   */
+/*   history_file_restore.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olyuboch <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,43 +12,27 @@
 
 #include "ft_history.h"
 
-void	ft_history_read(char *tmp)
+void	history_file_restore(const char *filename)
 {
 	int		fd;
-	t_his	*his;
+	char	*path;
 	char	*line;
 
-	his = NULL;
-	line = NULL;
-	if ((fd = open(tmp, O_RDONLY)) < 2)
+	g_history = NULL;
+	if (!g_env || !filename || filename[0] != '~')
 		return ;
+	path = ft_strjoin(env_get(g_env, "HOME"), filename + 1);
+	if ((fd = open(path, O_RDONLY | O_CREAT)) == -1)
+	{
+		ft_perror("42sh:", path);
+		return ;
+	}
 	while (get_next_line(fd, &line))
 	{
 		ft_add_to_history(&g_history, line);
 		free(line);
 		line = NULL;
 	}
-	free(line);
 	close(fd);
-	return ;
-}
-
-void	ft_history_upload(void)
-{
-	int		e;
-	char	*str;
-	char	*tmp;
-
-	if (!g_env)
-		return ;
-	if (!(e = ft_built_find_path(g_env, "HOME")))
-		return ;
-	str = g_env[e];
-	while (str && *str != '=')
-		str++;
-	if (str != NULL)
-		str++;
-	tmp = ft_strjoin(str, "/.42sh_history");
-	ft_history_read(tmp);
-	free(tmp);
+	free(path);
 }

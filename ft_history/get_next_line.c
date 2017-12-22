@@ -3,86 +3,111 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvarga <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: mbraslav <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/12/28 20:36:55 by mvarga            #+#    #+#             */
-/*   Updated: 2017/01/27 15:24:34 by mvarga           ###   ########.fr       */
+/*   Created: 2017/01/17 15:54:35 by mbraslav          #+#    #+#             */
+/*   Updated: 2017/01/17 15:54:37 by mbraslav         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_history.h"
+#include <stdlib.h>
+#include <unistd.h>
 
-static t_fd			*find_create_fd(const int fd, t_fd **pfile)
+t_list	*get_buff(int fd, t_list **list)
 {
-	t_fd			*pnew;
+	t_list	*last;
+	t_list	*new;
 
-	pnew = *pfile;
-	while (pnew)
+	last = *list;
+	while (last)
 	{
-		if (pnew->fd == fd)
-			return (pnew);
-		pnew = pnew->next;
+		if (fd == (int)last->content_size)
+			return (last);
+		last = last->next;
 	}
-	if (!(pnew = (t_fd*)malloc(sizeof(t_fd))))
+	if (!(new = malloc(sizeof(t_list))))
 		return (NULL);
-	pnew->fd = fd;
-	pnew->s_tmp = NULL;
-	pnew->next = *pfile;
-	*pfile = pnew;
-	return (pnew);
+	new->content_size = fd;
+	new->content = ft_strnew(0);
+	new->next = *list;
+	*list = new;
+	return (new);
 }
 
-static int			readline(char **s_tmp, char **line, char *buff)
+void	expand_str(char **str, const char *buf)
 {
-	char			*next_line;
-	char			*beg_line;
-	char			*tmp;
+	char	*new_str;
 
-	if (!*s_tmp)
-		*s_tmp = ft_strdup("\0");
+	new_str = ft_strjoin(*str, buf);
+	free(*str);
+	*str = new_str;
+}
+
+void	save_and_cut_rest(char **str, t_list *list)
+{
+	char	*new_str;
+	char	*linebreak;
+
+	linebreak = ft_strchr(*str, '\n');
+	free(list->content);
+	if (linebreak == NULL)
+	{
+		list->content = ft_strnew(0);
+		return ;
+	}
 	else
 	{
-		tmp = ft_strjoin(*s_tmp, buff);
-		free(*s_tmp);
-		*s_tmp = tmp;
-		if ((beg_line = ft_strchr(*s_tmp, '\n')))
-		{
-			*beg_line = '\0';
-			*line = ft_strdup(*s_tmp);
-			next_line = ft_strdup(beg_line + 1);
-			free(*s_tmp);
-			*s_tmp = next_line;
-			return (TRUE);
-		}
+		list->content = ft_strdup(linebreak + 1);
+		new_str = ft_strsub(*str, 0, ft_strlen(*str) - ft_strlen(linebreak));
+		free(*str);
+		*str = new_str;
 	}
-	return (FALSE);
 }
 
-int					get_next_line(const int fd, char **line)
+int		reading(const int fd, char **str)
 {
-	ssize_t			nbread;
-	char			buff[BUFF + 1];
-	static t_fd		*f;
-	t_fd			*file;
+	int		bytes;
+	char	*buf;
 
-	if ((file = find_create_fd(fd, &f)) && BUFF < 65535 && BUFF != 0)
+	if (!(buf = ft_memalloc(GNL_BUFF + 1)))
+		return (-1);
+	while ((bytes = (int)read(fd, buf, GNL_BUFF)) > 0)
 	{
-		(void)ft_memset(buff, 0, BUFF + 1);
-		if (readline(&(file->s_tmp), line, buff))
-			return (GNL_INSIDE);
-		while ((nbread = read(file->fd, buff, BUFF)) > 0)
-		{
-			if (readline(&(file->s_tmp), line, buff))
-				return (GNL_INSIDE);
-			(void)ft_memset(buff, 0, BUFF + 1);
-		}
-		if (*(file->s_tmp))
-		{
-			*line = ft_strdup(file->s_tmp);
-			ft_strdel(&file->s_tmp);
-			return (GNL_INSIDE);
-		}
-		return (nbread == -1 ? GNL_ERR : GNL_END);
+		buf[bytes] = '\0';
+		expand_str(str, buf);
+		ft_bzero(buf, GNL_BUFF + 1);
+		if (ft_strchr(*str, '\n'))
+			break ;
 	}
-	return (GNL_ERR);
+	free(buf);
+	return (bytes == 0 ? 0 : 1);
+}
+
+int		get_next_line(const int fd, char **line)
+{
+	static t_list	*list = NULL;
+	t_list			*static_buff;
+	char			*str;
+	int				isempty;
+	int				read_ret;
+
+	if (fd < 0 || GNL_BUFF <= 0 || read(fd, NULL, 0))
+		return (-1);
+	static_buff = get_buff(fd, &list);
+	str = ft_strdup(static_buff->content);
+	isempty = (str[0]) ? 0 : 1 ;
+	read_ret = reading(fd, &str);
+	if (read_ret == -1)
+		return (-1);
+	save_and_cut_rest(&str, static_buff);
+	if (!ft_strlen(str) && !ft_strlen(static_buff->content) && isempty && \
+		!read_ret)
+	{
+		*line = NULL;
+		free(str);
+		return (0);
+	}
+	*line = str;
+	return (1);
 }

@@ -19,12 +19,8 @@
 # include "builtin.h"
 # include "ft_exec.h"
 
-# define TRUE 1
-# define FALSE 0
-# define GNL_END 0
-# define GNL_ERR -1
-# define GNL_INSIDE 1
-# define BUFF 32
+# define GNL_BUFF 8
+
 
 extern char		**g_env;
 
@@ -36,9 +32,11 @@ typedef struct	s_fd
 }				t_fd;
 
 extern t_his	*g_history;
-void			ft_history_upload(void);
-void			ft_history_load(char *str, int fl);
+
+void			history_file_restore(const char *filename);
 int				get_next_line(const int fd, char **line);
+
+void			ft_history_load(char *str, int fl);
 int				ft_history_print(t_proc **proc);
 void			ft_history_error(t_proc **proc, char *er);
 int				ft_history_stdout_clear(t_proc **proc);
