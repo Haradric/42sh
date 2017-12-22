@@ -21,7 +21,6 @@
 # include <sys/stat.h>
 # include <sys/ioctl.h>
 # include <termios.h>
-# include <term.h>
 # include <signal.h>
 # include "../libft/libft.h"
 # define ARRL "\033[D"
