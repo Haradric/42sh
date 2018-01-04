@@ -24,6 +24,6 @@ extern char	*g_rgt;
 
 void		ft_signals(void);
 void		ft_signals_input(void);
-void		ft_terminal_set(void);
+void		terminal_switch_mode(void);
 
 #endif

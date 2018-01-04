@@ -23,13 +23,13 @@ void	ft_history_in(char *str)
 		str++;
 	}
 	while (len--)
-		ft_putstr(ARRL);
+		ft_putstr("\033[D");
 	len = ft_strlen(str);
 	while (len--)
 		ft_putstr(" ");
 	len = ft_strlen(str);
 	while (len--)
-		ft_putstr(ARRL);
+		ft_putstr("\033[D");
 }
 
 char	*ft_history_hi(int n)
@@ -42,11 +42,11 @@ char	*ft_history_hi(int n)
 		his = his->next;
 	if (his)
 		if (his->next)
-			if (!his->next->tory)
+			if (!his->next->data)
 				return (NULL);
 	if (n == 0 && his)
-		if (his->tory)
-			return (his->tory);
+		if (his->data)
+			return (his->data);
 	return (NULL);
 }
 
@@ -60,8 +60,8 @@ char	*ft_history_low(int n)
 	while (++n && his)
 		his = his->prev;
 	if (n == 0 && his)
-		if (his->tory)
-			return (his->tory);
+		if (his->data)
+			return (his->data);
 	return (NULL);
 }
 

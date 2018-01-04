@@ -1,19 +1,8 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_readline.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: alischyn <alischyn@student.unit.ua>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/01 15:59:55 by alischyn          #+#    #+#             */
-/*   Updated: 2017/10/01 15:59:56 by alischyn         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "ft_readline.h"
 #include "ft_signals.h"
 
-void			ft_terminal_set(void)
+void			terminal_switch_mode(void)
 {
 	struct termios	termios;
 
@@ -22,16 +11,16 @@ void			ft_terminal_set(void)
 	tcsetattr(2, TCSANOW, &termios);
 }
 
-char			*ft_readline(void)
+char			*input_get(void)
 {
-	char		*line;
+	char	*line;
 
 	line = NULL;
 	ft_signals_input();
-	ft_terminal_set();
+	terminal_switch_mode();
 	ft_putstr(g_prompt);
 	ft_get_line(&line, &g_history);
-	ft_terminal_set();
+	terminal_switch_mode();
 	ft_signals();
 	return (line);
 }

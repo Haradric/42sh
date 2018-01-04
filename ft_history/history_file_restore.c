@@ -29,7 +29,7 @@ void	history_file_restore(const char *filename)
 	}
 	while (get_next_line(fd, &line))
 	{
-		ft_add_to_history(&g_history, line);
+		history_add(&g_history, line);
 		free(line);
 		line = NULL;
 	}

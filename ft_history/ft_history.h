@@ -15,25 +15,34 @@
 
 # include <stdio.h>
 # include <fcntl.h>
-# include "ft_readline.h"
+# include <sys/ioctl.h>
+
+# include "ft_readline.h" //
 # include "builtin.h"
 # include "ft_exec.h"
 
 # define GNL_BUFF 8
 
+typedef struct		s_fd
+{
+	int				fd;
+	char			*s_tmp;
+	struct s_fd		*next;
+}					t_fd;
+
+//typedef struct		s_his
+//{
+//	char			*tory;
+//	char			*tmp;
+//	struct s_his	*prev;
+//	struct s_his	*next;
+//}					t_his;
 
 extern char		**g_env;
-
-typedef struct	s_fd
-{
-	int			fd;
-	char		*s_tmp;
-	struct s_fd	*next;
-}				t_fd;
-
 extern t_his	*g_history;
 
 void			history_file_restore(const char *filename);
+void			history_free(t_his **list);
 int				get_next_line(const int fd, char **line);
 
 void			ft_history_load(char *str, int fl);

@@ -39,7 +39,7 @@ int		ft_get_line_is_exit(char **line)
 			g_heredoc = NULL;
 			return (0);
 		}
-		ft_terminal_set();
+		terminal_switch_mode();
 		exit(0);
 	}
 	return (1);

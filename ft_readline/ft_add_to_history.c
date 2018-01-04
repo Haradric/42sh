@@ -18,7 +18,7 @@ void	ft_add_next(t_his **his)
 
 	if (!(next = (t_his *)malloc(sizeof(t_his))))
 		return ;
-	next->tory = NULL;
+	next->data = NULL;
 	next->tmp = NULL;
 	next->next = NULL;
 	next->prev = (*his);
@@ -31,7 +31,7 @@ void	ft_add_first(t_his **his, char *line)
 
 	if (!(new = (t_his *)malloc(sizeof(t_his))))
 		return ;
-	new->tory = ft_strdup(line);
+	new->data = ft_strdup(line);
 	new->tmp = NULL;
 	new->next = NULL;
 	new->prev = NULL;
@@ -48,14 +48,24 @@ void	ft_history_down(t_his **his)
 	}
 }
 
-void	ft_add_to_history(t_his **his, char *line)
+//static t_his	*new_entry(const char *data)
+//{
+//	t_his	*entry;
+//
+//	if (!(entry = ft_memalloc(sizeof(t_his))))
+//		return (NULL);
+//	entry->data = ft_strdup(data);
+//	return (entry);
+//}
+
+void	history_add(t_his **his, char *line)
 {
 	if (!(*his))
 		ft_add_first(his, line);
 	else
 	{
 		ft_history_down(his);
-		(*his)->tory = ft_strdup(line);
+		(*his)->data = ft_strdup(line);
 		ft_add_next(his);
 	}
 	ft_history_down(his);

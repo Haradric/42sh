@@ -65,7 +65,7 @@ void		ft_find_quotes(t_token **tokens, char **cmd)
 	{
 		write(1, "\n", 1);
 		free_token_list(*tokens);
-		(*cmd) = ft_join_quote(*cmd, ft_readline());
+		(*cmd) = ft_join_quote(*cmd, input_get());
 		(*tokens) = get_token_list((*cmd) ? (*cmd) : "");
 	}
 	g_prompt = oldprompt;
@@ -79,7 +79,7 @@ void		go_42(void)
 
 	while (1)
 	{
-		if ((input = ft_readline()))
+		if ((input = input_get()))
 		{
 			tokens = get_token_list(input ? input : "");
 			ft_find_quotes(&tokens, &input);
@@ -98,7 +98,7 @@ void		go_42(void)
 	}
 }
 
-static void	init_42(const char **envp)
+static void	shell_init(const char **envp)
 {
 	char	*shlvl_str;
 
@@ -124,11 +124,12 @@ int			main(int argc, const char **argv, const char **envp)
 {
 	(void)argc;
 	(void)argv;
+	sleep(1);
 	if (argc > 1)
 		terminate("42sh:", "non-interactive mode is not supported yet");
-	init_42(envp);
+	shell_init(envp);
 	go_42();
 	hash_table_free(&g_table);
-	ft_free_history();
+	history_free(&g_history);
 	return (0);
 }

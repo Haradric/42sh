@@ -63,10 +63,10 @@ char	*ft_read_from_heredoc(char *doc)
 	g_heredoc = doc;
 	while (1)
 	{
-		ft_terminal_set();
+		terminal_switch_mode();
 		ft_putstr("heredoc> ");
 		ft_get_line(&cmp, &g_history);
-		ft_terminal_set();
+		terminal_switch_mode();
 		write(1, "\n", 1);
 		if (cmp)
 		{

@@ -32,7 +32,7 @@ static void	input_signal_handler(int signo)
 {
 	if (signo == SIGQUIT)
 	{
-		ft_terminal_set();
+		terminal_switch_mode();
 		exit(0);
 	}
 	if (signo == SIGINT)

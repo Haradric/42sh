@@ -46,7 +46,7 @@ void	ft_history_out(void)
 		return ;
 	while (his)
 	{
-		ft_putendl(his->tory);
+		ft_putendl(his->data);
 		his = his->next;
 	}
 }
@@ -56,7 +56,7 @@ void	ft_history_clear(void)
 	int	fl;
 
 	fl = O_TRUNC;
-	ft_free_history();
+	history_free(&g_history);
 	ft_history_load(NULL, fl);
 }
 

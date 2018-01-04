@@ -18,3 +18,4 @@ SOURCES += ft_history/history_file_restore.c \
 			ft_history/ft_history_error.c \
 			ft_history/ft_history_stdout_clear.c \
 			ft_history/ft_history_stdin.c \
+			ft_history/history_free.c\

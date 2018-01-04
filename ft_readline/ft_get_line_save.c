@@ -49,7 +49,7 @@ void	ft_get_line_save(char **lft, char **rgt, char **line, t_his **his)
 		{
 			if (*line[0] != '!')
 			{
-				ft_add_to_history(his, *line);
+				history_add(his, *line);
 				ft_history_load(*line, fl);
 			}
 		}

@@ -22,11 +22,11 @@ t_match	*ft_history_match(t_his *his, char *new, int l)
 	head = NULL;
 	while (tmp)
 	{
-		if (tmp->tory)
+		if (tmp->data)
 		{
-			if (!ft_strncmp(new, tmp->tory, l))
+			if (!ft_strncmp(new, tmp->data, l))
 			{
-				if (!ft_add_match(&head, tmp->tory))
+				if (!ft_add_match(&head, tmp->data))
 				{
 					return (NULL);
 				}

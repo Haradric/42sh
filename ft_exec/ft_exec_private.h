@@ -13,6 +13,7 @@
 #ifndef __FT_EXEC_PRIVATE_H
 # define __FT_EXEC_PRIVATE_H
 
+# include <sys/stat.h>
 # include <sys/wait.h>
 
 # include "ft_exec.h"

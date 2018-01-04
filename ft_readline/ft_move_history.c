@@ -62,7 +62,7 @@ void	ft_arrow_up(char **lft, char **rgt, t_his **his)
 		if ((*his)->tmp)
 			(*lft) = ft_strdup((*his)->tmp);
 		else
-			(*lft) = ft_strdup((*his)->tory);
+			(*lft) = ft_strdup((*his)->data);
 		ft_putstr((*lft));
 	}
 }
