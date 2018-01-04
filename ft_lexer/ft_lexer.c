@@ -55,7 +55,7 @@ static t_token	*get_token(char **s)
 	return (token);
 }
 
-t_token			*get_token_list(char *str)
+t_token			*get_token_list(const char *str)
 {
 	t_token	*list;
 	t_token	*last;
@@ -65,7 +65,7 @@ t_token			*get_token_list(char *str)
 
 	list = token_new(T_OP_SEMICOLON, ST_NONE, ";");
 	last = list;
-	s = str;
+	s = (char *)str;
 	bquote = 0;
 	while ((new = get_token(&s)))
 	{

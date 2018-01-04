@@ -56,6 +56,6 @@ typedef size_t	(*t_lexfunc)(char *s, t_token **token);
 extern char		**g_env;
 
 t_token			*token_scan_string(const char *string);
-t_token			*get_token_list(char *str);
+t_token			*get_token_list(const char *str);
 
 #endif
