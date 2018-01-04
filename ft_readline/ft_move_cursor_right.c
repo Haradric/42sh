@@ -55,11 +55,9 @@ void	ft_lft_vs_rgt(char **lft, char **rgt, int len)
 {
 	char	*tmpr;
 	char	*tmpl;
-	int		r;
 	int		l;
 
 	l = ft_strlen((*lft));
-	r = ft_strlen((*rgt));
 	tmpr = NULL;
 	if ((*rgt)[1] != '\0')
 	{

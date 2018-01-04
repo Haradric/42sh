@@ -54,10 +54,8 @@ int	ft_count_num(t_match *mat)
 
 int	ft_tab_match_get(t_match *mat)
 {
-	t_match	*tmp;
 	int		num;
 
-	tmp = mat;
 	num = -1;
 	if (!mat->next)
 		return (ft_strlen(mat->find));

@@ -37,10 +37,8 @@ void	ft_print_rgt(char *rgt)
 
 int		ft_check_left(char *lft)
 {
-	int	i;
 	int	l;
 
-	i = 0;
 	if (!lft)
 		return (0);
 	else

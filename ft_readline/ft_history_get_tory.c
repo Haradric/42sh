@@ -84,11 +84,9 @@ int		ft_char_analys(char **new, char *buf, char **lft, t_his *his)
 
 void	ft_history_get_tory(char **lft, t_his *his)
 {
-	t_his	*tory;
 	char	*buf;
 	char	*new;
 
-	tory = his;
 	if (!(buf = (char *)malloc(sizeof(char) * (READ_SIZE + 1))))
 		return ;
 	ft_bzero(buf, (READ_SIZE));

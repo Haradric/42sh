@@ -52,9 +52,6 @@ void	ft_clear(char **lft, char **rgt)
 
 void	ft_history_find(char **lft, char **rgt, t_his *his)
 {
-	t_his	*tory;
-
-	tory = his;
 	ft_clear(lft, rgt);
 	ft_putstr("$f_istory> ");
 	ft_history_get_tory(lft, his);

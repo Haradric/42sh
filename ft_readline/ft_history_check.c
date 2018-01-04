@@ -56,7 +56,6 @@ void	ft_history_check(char **new, t_his *his)
 {
 	t_match	*mat;
 	int		l;
-	t_match	*tmp;
 	int		num;
 
 	if (!(*new))
@@ -64,7 +63,6 @@ void	ft_history_check(char **new, t_his *his)
 	l = ft_strlen((*new));
 	if (!(mat = ft_history_match(his, *new, l)))
 		return ;
-	tmp = mat;
 	if ((num = ft_tab_match_get(mat)))
 	{
 		ft_try_to_print(mat->find, num, new, l);

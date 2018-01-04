@@ -14,10 +14,8 @@
 
 int		ft_find_slash(char *cut)
 {
-	int	i;
 	int	l;
 
-	i = 0;
 	if (!cut)
 		return (0);
 	else
