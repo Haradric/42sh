@@ -1,4 +1,5 @@
-CFLAGS += -Ift_readline
+
+LDFLAGS += -Ift_readline
 SOURCES += 	ft_readline/ft_add_to_history.c \
 			ft_readline/ft_add_to_tmp.c \
 			ft_readline/ft_free_match.c \

@@ -1,16 +1,5 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    files.mk                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: olyuboch <marvin@42.fr>                    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2017/09/27 14:03:43 by olyuboch          #+#    #+#              #
-#    Updated: 2017/09/27 14:03:45 by olyuboch         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
-CFLAGS += -Ift_history
+LDFLAGS += -Ift_history
 SOURCES += ft_history/history_file_restore.c \
 			ft_history/ft_history_load.c \
 			ft_history/get_next_line.c \

@@ -1,4 +1,5 @@
-CFLAGS += -Ift_parser
+
+LDFLAGS += -Ift_parser
 SOURCES += ft_parser/ft_parser.c \
 		   ft_parser/ft_parser_core.c \
 		   ft_parser/ft_parser_main.c \

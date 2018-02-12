@@ -10,5 +10,5 @@
 #                                                                              #
 #******************************************************************************#
 
-CFLAGS += -Ift_signals
+LDFLAGS += -Ift_signals
 SOURCES += ft_signals/ft_signals.c

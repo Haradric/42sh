@@ -1,5 +1,5 @@
-CFLAGS += -Ift_preprocessing
-LDFLAGS += -ll
+
+LDFLAGS += -Ift_preprocessing
 SOURCES += ft_preprocessing/ft_preprocessing.c \
 			ft_preprocessing/ft_pre_string.c \
 			ft_preprocessing/ft_pre_create_proc.c \

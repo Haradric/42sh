@@ -1,3 +1,4 @@
+
 TYPE = release
 prefix = build-$(TYPE)
 obj = $(prefix)/obj
@@ -7,10 +8,10 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 LDFLAGS =
 SOURCES =	main.c\
-			ft_join_quote.c\
 			utils.c\
 			env.c\
-			error.c
+			error.c\
+			ft_join_quote.c
 LIBFT = libft/libft.a
 
 OBJECTS = $(addprefix $(obj)/,$(subst .c,.o,$(SOURCES)))
@@ -32,7 +33,6 @@ include ft_parser/files.mk
 include ft_free/files.mk
 include ft_preprocessing/files.mk
 include ft_globbing/files.mk
-
 include ft_signals/files.mk
 
 .PHONY: all clean fclean norm
@@ -43,24 +43,25 @@ $(NAME): $(bin)
 	@ln -f $(bin) $(NAME)
 
 $(bin): $(LIBFT) $(OBJECTS)
-	@echo "\033[1;35mCCLD \033[0;35m$@\033[0m"
-	@$(CC) -o $@ $^ $(LDFLAGS)
+	@echo "\033[34mcreating $(NAME)\033[39m"
+	@$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
 $(LIBFT):
-	make -C libft
+	@make -C libft
 
 $(obj)/%.o: %.c
-	@echo "\033[1;32mCC \033[0;32m$@\033[0m"
 	@mkdir -p $(obj)/$(shell dirname $<)
-	@$(CC) $(CFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) $(LDFLAGS) -c -o $@ $<
 
 clean:
 	@make clean -C libft
-	rm -rf build-*/obj
+	@echo "\033[34mremoving object files\033[39m"
+	@rm -rf build-release/obj build-debug/obj
 
 fclean:
 	@make fclean -C libft
-	rm -rf build-debug build-release $(NAME)
+	@echo "\033[34mremoving $(NAME)\033[39m"
+	@rm -rf build-debug build-release $(NAME)
 
 re: fclean all
 

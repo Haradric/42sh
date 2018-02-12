@@ -1,4 +1,5 @@
-CFLAGS += -Ibuiltin
+
+LDFLAGS += -Ibuiltin
 SOURCES +=	builtin/builtin_cd.c \
 			builtin/builtin_setenv.c \
 			builtin/builtin_unsetenv.c \
