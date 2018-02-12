@@ -6,7 +6,7 @@ bin = $(prefix)/$(NAME)
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-LDFLAGS =
+LDFLAGS = -Ilibft
 SOURCES =	main.c\
 			utils.c\
 			env.c\
